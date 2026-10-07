@@ -9,15 +9,13 @@ import matplotlib as mpl
 import os
 import shutil
 
-
+# Automatisch FFmpeg-pad instellen voor Streamlit Cloud (Linux)
 ffmpeg_path = shutil.which("ffmpeg") or "/usr/bin/ffmpeg"
 if os.path.exists(ffmpeg_path):
     mpl.rcParams['animation.ffmpeg_path'] = ffmpeg_path
 
 
-
-
-
+#mpl.rcParams['animation.ffmpeg_path'] = '/opt/homebrew/bin/ffmpeg'
 
 st.set_page_config(page_title="PSV Analytics - SciSports 2D Visualizer", layout="centered")
 st.title("PSV 2D Map - SciSports Match Visualizer")
@@ -275,11 +273,11 @@ if csv_file is not None and json_file is not None:
             progress_bar.progress(progress)
             status_text.text(f"Bezig met renderen van frame {frame_idx + 1} van {total_frames} ({int(progress * 100)}%)...")
 
-        ani = FuncAnimation(fig, update, frames=total_frames, interval=100)
+        ani = FuncAnimation(fig, update, frames=total_frames, blit=True, interval=100)
         
         output_filename = "SciSports_Match.mp4"
-        writer = FFMpegWriter(fps=10, metadata=dict(artist='PSV Analytics'), bitrate=1800)
-        ani.save(output_filename, writer=writer)
+        writer = FFMpegWriter(fps=10, metadata=dict(artist='PSV Analytics'), bitrate=1500)
+        ani.save(output_filename, writer=writer, dpi=80)
         plt.close(fig)
 
         status_text.text("Renderen voltooid!")
