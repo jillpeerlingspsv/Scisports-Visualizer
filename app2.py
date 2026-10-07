@@ -273,7 +273,7 @@ if csv_file is not None and json_file is not None:
             progress_bar.progress(progress)
             status_text.text(f"Bezig met renderen van frame {frame_idx + 1} van {total_frames} ({int(progress * 100)}%)...")
 
-        ani = FuncAnimation(fig, update, frames=total_frames, blit=True, interval=100)
+        ani = FuncAnimation(fig, update, frames=total_frames, interval=100)
         
         output_filename = "SciSports_Match.mp4"
         writer = FFMpegWriter(fps=10, metadata=dict(artist='PSV Analytics'), bitrate=1500)
