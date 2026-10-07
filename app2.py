@@ -6,9 +6,18 @@ from matplotlib.animation import FuncAnimation, FFMpegWriter
 import json
 from matplotlib.patches import Polygon
 import matplotlib as mpl
+import os
+import shutil
 
 
-mpl.rcParams['animation.ffmpeg_path'] = '/opt/homebrew/bin/ffmpeg'
+ffmpeg_path = shutil.which("ffmpeg") or "/usr/bin/ffmpeg"
+if os.path.exists(ffmpeg_path):
+    mpl.rcParams['animation.ffmpeg_path'] = ffmpeg_path
+
+
+
+
+
 
 st.set_page_config(page_title="PSV Analytics - SciSports 2D Visualizer", layout="centered")
 st.title("PSV 2D Map - SciSports Match Visualizer")
