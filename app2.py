@@ -269,7 +269,7 @@ if csv_file is not None and json_file is not None:
         ani = FuncAnimation(fig, update, frames=total_frames, interval=100)
         
         output_filename = "SciSports_Match.mp4"
-        writer = FFMpegWriter(fps=10, metadata=dict(artist='PSV Analytics'), bitrate=1800, exec_path='ffmpeg')
+        writer = FFMpegWriter(fps=10, metadata=dict(artist='PSV Analytics'), bitrate=1800)
         ani.save(output_filename, writer=writer)
         plt.close(fig)
 
