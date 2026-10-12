@@ -8,6 +8,7 @@ from matplotlib.patches import Polygon
 import matplotlib as mpl
 import os
 import shutil
+import signal
 
 
 ffmpeg_path = shutil.which("ffmpeg") or "/usr/bin/ffmpeg"
@@ -18,6 +19,13 @@ if os.path.exists(ffmpeg_path):
 #mpl.rcParams['animation.ffmpeg_path'] = '/opt/homebrew/bin/ffmpeg'
 
 st.set_page_config(page_title="PSV Analytics - SciSports 2D Visualizer", layout="centered")
+
+st.sidebar.title("Bediening")
+if st.sidebar.button("App Afsluiten"):
+    st.sidebar.warning("App wordt afgesloten...")
+    os.kill(os.getpid(), signal.SIGTERM)
+
+st.sidebar.markdown("---")
 st.title("PSV 2D Map - SciSports Match Visualizer")
 st.write("Upload het **PlayerMatchStats CSV-bestand** én het **SciSportsPositions JSON-bestand** om de MP4-video te maken.")
 
