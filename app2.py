@@ -9,7 +9,7 @@ import matplotlib as mpl
 import os
 import shutil
 
-# Automatisch FFmpeg-pad instellen voor Streamlit Cloud (Linux)
+
 ffmpeg_path = shutil.which("ffmpeg") or "/usr/bin/ffmpeg"
 if os.path.exists(ffmpeg_path):
     mpl.rcParams['animation.ffmpeg_path'] = ffmpeg_path
@@ -19,9 +19,9 @@ if os.path.exists(ffmpeg_path):
 
 st.set_page_config(page_title="PSV Analytics - SciSports 2D Visualizer", layout="centered")
 st.title("PSV 2D Map - SciSports Match Visualizer")
-st.write("Upload het **PlayerMatchStats CSV-bestand** én het **SciSportsPositions JSON-bestand** om de MP4-video te genereren.")
+st.write("Upload het **PlayerMatchStats CSV-bestand** én het **SciSportsPositions JSON-bestand** om de MP4-video te maken.")
 
-# 1. Twee uploadknoppen
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -95,7 +95,7 @@ def draw_line_group(ax, group_df, color):
                 bbox=dict(boxstyle="round,pad=0.15", facecolor="white", alpha=0.8, edgecolor=color),
                 ha="center", va="center", zorder=6)
 
-# Pas verwerken als BEIDE bestanden zijn geüpload
+
 if csv_file is not None and json_file is not None:
     player_stats = pd.read_csv(csv_file)
     player_stats = player_stats[player_stats["team"].astype(str).str.contains(TARGET_TEAM, case=False, na=False)].copy()
@@ -161,7 +161,7 @@ if csv_file is not None and json_file is not None:
 
     st.success(f"Beide bestanden succesvol ingeladen! Totaal aantal frames: **{total_frames}**")
 
-    if st.button("▶️ Genereer Video"):
+    if st.button("Genereer Video"):
         progress_bar = st.progress(0)
         status_text = st.empty()
 
